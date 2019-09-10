@@ -15,6 +15,6 @@ foreach($files as $file) {
     <title>Narrow Cast</title>
 </head>
 <body>
-<p>bruh</p>
+
 </body>
 </html>
