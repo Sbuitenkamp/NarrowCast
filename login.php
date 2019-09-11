@@ -1,14 +1,11 @@
 <?php
-// dynamic controller including because effort
-$files = glob('./controllers/*.{php}', GLOB_BRACE);
-foreach($files as $file) {
-    include_once($file);
-}
 
-include_once('./models/Db.php');
+include_once './models/Db.php';
+include_once './models/User.php';
 
 $db = new Db();
 $db->connect();
+
 ?>
 <!doctype html>
 <html lang="nl">
@@ -17,9 +14,12 @@ $db->connect();
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./styles/style.css">
-    <title>Narrow Cast</title>
+    <title>Narrow Cast - Login</title>
 </head>
 <body>
-    
+    <form action="" method="post">
+        <input type="text" name="username">
+        <input type="submit" name="login" value="login">
+    </form>
 </body>
 </html>
