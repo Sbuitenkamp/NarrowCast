@@ -1,0 +1,13 @@
+/*carousel bar*/
+
+/*carousel animations*/
+
+/*reset the browser*/
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
+    width: 100vw;
+}

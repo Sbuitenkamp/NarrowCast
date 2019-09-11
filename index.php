@@ -13,8 +13,14 @@ foreach($files as $file) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./styles/style.css">
     <title>Narrow Cast</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="controllers/index.js"></script>
 </head>
-<body>
-
+<?php
+if (isset($_POST['url'])) {
+    load($_POST['url']);
+}
+?>
+<div class="footer"></div>
 </body>
 </html>
