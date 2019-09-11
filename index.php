@@ -1,14 +1,13 @@
 <?php
-// dynamic controller including because effort
-$files = glob('./controllers/*.{php}', GLOB_BRACE);
-foreach($files as $file) {
-    include_once($file);
-}
-
+include_once('./controllers/index.php');
 include_once('./models/Db.php');
 
 $db = new Db();
-$db->connect();
+$result = $db->select([["name", "activated", "timeout", "frequency"], "modules", null, "2"]);
+foreach ($result as $res) {
+    print_r($res);
+    echo "<br>";
+}
 ?>
 <!doctype html>
 <html lang="nl">
@@ -22,11 +21,7 @@ $db->connect();
     <script src="controllers/index.js"></script>
 </head>
 <body>
-<?php
-if (isset($_POST['url'])) {
-    load($_POST['url']);
-}
-?>
+<?php if (isset($_POST['url'])) load($_POST['url']);?>
 <div class="footer"></div>
 </body>
 </html>
