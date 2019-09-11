@@ -11,4 +11,7 @@ class User
         $this->password = $password;
         $this->db = $db;
     }
+
+    
+
 }

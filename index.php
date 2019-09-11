@@ -4,6 +4,11 @@ $files = glob('./controllers/*.{php}', GLOB_BRACE);
 foreach($files as $file) {
     include_once($file);
 }
+
+include_once('./models/Db.php');
+
+$db = new Db();
+$db->connect();
 ?>
 <!doctype html>
 <html lang="nl">
@@ -16,6 +21,7 @@ foreach($files as $file) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="controllers/index.js"></script>
 </head>
+<body>
 <?php
 if (isset($_POST['url'])) {
     load($_POST['url']);
