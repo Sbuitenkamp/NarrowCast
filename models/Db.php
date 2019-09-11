@@ -8,7 +8,7 @@ class Db
     private $charset = 'utf8mb4';
 
 
-    public function connect()
+    private function connect()
     {
        $dsn = "mysql:host=$this->host;dbname=$this->databaseName;charset=$this->charset";
        $options = [
@@ -22,5 +22,33 @@ class Db
         } catch (PDOException $e) {
            throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
+    }
+
+    private function where($conditions)
+    {
+        $queryPart = "";
+        if (!empty($conditions)) {
+            foreach ($conditions as $key => $condition) {
+                if (strpos($queryPart, "WHERE") == false) $queryPart .= " WHERE ";
+                $queryPart .= $key . " = " . $condition . " AND ";
+            }
+            $queryPart = " " . trim(substr_replace($queryPart ,"", -4));
+        }
+        return $queryPart;
+
+    }
+
+    // put all your options in one array with the same order
+    public function select($options = [])
+    {
+        [$values, $table, $conditions, $limit] = $options;
+        $con = $this->connect();
+        $query = "SELECT " . join(",", $values) . " FROM " . $table;
+        $query .= $this->where($conditions);
+        if (isset($limit)) $query .= " LIMIT " . $limit;
+        $query .= ";";
+        $prepared = $con->prepare($query);
+        $prepared->execute();
+        return $prepared->fetchAll();
     }
 }

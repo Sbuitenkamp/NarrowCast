@@ -1,5 +1,5 @@
 let counter = 0;
-// setInterval(() => {
+setInterval(() => {
     $.ajax({
         type: 'POST',
         url: 'index.php',
@@ -14,4 +14,4 @@ let counter = 0;
             console.log('riB')
         }
     });
-// }, 5000);
+}, 5000);
