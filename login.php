@@ -1,9 +1,14 @@
 <?php
+if(!isset($_SESSION['username'])) {
+    echo 'not logged in <br>';
+} else {
+    echo 'logged in<br>';
+}
 
-include_once './models/Db.php';
-include_once './models/User.php';
+require './models/Db.php';
 
 $db = new Db();
+
 $db->connect();
 
 ?>
@@ -17,8 +22,15 @@ $db->connect();
     <title>Narrow Cast - Login</title>
 </head>
 <body>
-    <form action="" method="post">
-        <input type="text" name="username">
+    <form action="authenticate.php" method="post" class="form">
+        <div class="form__group">
+            <input type="text" name="username" autocomplete="off">
+            <label for="username">Gebruikersnaam</label>
+        </div>
+        <div class="form__group">
+            <input type="text" name="password" autocomplete="off">
+            <label for="password">Wachtwoord</label>
+        </div>
         <input type="submit" name="login" value="login">
     </form>
 </body>

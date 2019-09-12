@@ -1,9 +1,9 @@
 <?php
 class User
 {
-    public $userName;
-    public $password;
-    public $db;
+    private $userName;
+    private $password;
+    private $db;
 
     public function __construct($userName = null, $password = null, $db = null)
     {
@@ -12,6 +12,13 @@ class User
         $this->db = $db;
     }
 
-    
+    public function login() 
+    {       
+        $this->password = $_POST['password'];
+        
+        echo $this->password;
+    }
+
 
 }
+
