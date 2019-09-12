@@ -7,7 +7,6 @@ class Db
     private $databaseName = 'narrow_cast';
     private $charset = 'utf8mb4';
 
-
     private function connect()
     {
        $dsn = "mysql:host=$this->host;dbname=$this->databaseName;charset=$this->charset";
@@ -41,11 +40,34 @@ class Db
     // put all your options in one array with the same order
     public function select($options = [])
     {
-        [$values, $table, $conditions, $limit] = $options;
+        [
+            $values, // array
+            $table, // string
+            $conditions, // assoc array
+            $limit // int
+        ] = $options;
         $con = $this->connect();
         $query = "SELECT " . join(",", $values) . " FROM " . $table;
         $query .= $this->where($conditions);
         if (isset($limit)) $query .= " LIMIT " . $limit;
+        $query .= ";";
+        $prepared = $con->prepare($query);
+        $prepared->execute();
+        return $prepared->fetchAll();
+    }
+
+    public function update($options = [])
+    {
+        [
+            $values, // assoc array
+            $table, // string
+            $conditions // assoc array
+        ] = $options;
+        $con = $this->connect();
+        $query = "UPDATE " . $table . " SET ";
+        foreach ($values as $col => $value) $query .= $col . " = " . $value . ", ";
+        $query = trim(substr_replace($query ,"", -2));
+        $query .= $this->where($conditions);
         $query .= ";";
         $prepared = $con->prepare($query);
         $prepared->execute();
