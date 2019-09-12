@@ -3,11 +3,11 @@ include_once('./controllers/index.php');
 include_once('./models/Db.php');
 
 $db = new Db();
-$result = $db->select([["name", "activated", "timeout", "frequency"], "modules", null, "2"]);
-foreach ($result as $res) {
-    print_r($res);
-    echo "<br>";
-}
+//$result = $db->update([["name" => '"thing"', "activated" => true, "timeout" => 0, "frequency" => "null"], "modules", ["frequency" => null]]);
+//foreach ($result as $res) {
+//    print_r($res);
+//    echo "<br>";
+//}
 ?>
 <!doctype html>
 <html lang="nl">
