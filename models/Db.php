@@ -12,7 +12,7 @@ class Db
     private $databaseName = 'narrow_cast';
     private $charset = 'utf8mb4';
 
-    private function connect()
+    public function connect()
     {
        $dsn = "mysql:host=$this->host;dbname=$this->databaseName;charset=$this->charset";
        $options = [
