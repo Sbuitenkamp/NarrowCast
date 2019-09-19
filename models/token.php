@@ -15,9 +15,4 @@ class Token
     {
         return $this->generateCsrfToken();
     }
-
-    public function tokenExpiration()
-    {
-        return time() + 3600;
-    }
 }

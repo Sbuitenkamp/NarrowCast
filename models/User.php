@@ -1,7 +1,7 @@
 <?php
+
 class User
 {
-    private $userId;
     private $username;
     private $password;
     private $db;
@@ -39,12 +39,12 @@ class User
 
     public function verifyPassword($userPassword)
     {
-        $token_length = 32;
-
         if (password_verify($this->password, $userPassword)) {
             $_SESSION['username'] = $this->username;
-            $_SESSION['valid_until'] = time() + 60*60;
-            $_SESSION['csrf-token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $token_length);
+            // Session expires after an hour
+            $_SESSION['valid_until'] = time() + 3600;
+            // Token expires after an hour, will log the user out
+            $_SESSION['token-expiration'] = time() + 3600;
             $this->login();
             exit();
         } else {
