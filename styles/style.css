@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', serif;
 }
 
 input[name="username"],
@@ -137,11 +137,11 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #ffffff;
 }
 
 .footer__copyright {
     font-size: 0.9em;
-    color: #ffffff;
     opacity: 1;
 }
 
