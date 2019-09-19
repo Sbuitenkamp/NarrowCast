@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "NarrowCast\\": "models/"
+    }
+  },
+  "require": {
+    "cboden/ratchet": "^0.4.1",
+    "ext-json": "*",
+    "ext-pdo": "*"
+  }
+}

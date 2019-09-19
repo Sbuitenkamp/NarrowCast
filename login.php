@@ -2,10 +2,12 @@
 require './models/Db.php';
 require './models/User.php';
 require './models/token.php';
+
 session_unset();
 session_destroy();
 
 $db = new Db();
+
 $user = new User();
 $token = new Token();
 
