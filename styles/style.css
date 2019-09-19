@@ -6,12 +6,155 @@
 * {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
     box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+input[name="username"],
+input[name="password"] {
+    border: none;
+    border-bottom: 1px solid #000000;
+    padding: 1.2em 0;
+    margin-bottom: 2em;
+}
+
+.login__form {
+    position: relative;
+}
+
+.error {
+    position: absolute;
+    top: -10%;
+    color: red;
+    letter-spacing: 2px;
+    font-size: .8em;
+}
+
+.background--overlay {
+    background: rgba(0, 0, 0, 0.55);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
 }
 
 html, body {
     width: 100vw;
     height: 100vh;
+}
+
+/* login page */
+.login {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__background {
+    background: url('../images/bg.png') no-repeat center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.login__container {
+    width: 30%;
+    height: 65%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__logo {
+    width: 40%;
+    display: flex; 
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.login__form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__group {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form__group .label-float {
+    position: absolute;
+    top: 15px;
+    color: gray;
+    pointer-events: none;
+}
+
+.form__group input:focus ~ .label-float,
+.form__group input:valid ~ .label-float {
+    top: -10px;
+    font-size: .8em;
+    color: #246DE8;
+    transition: all 100ms ease-in-out; 
+}
+
+.form__login-btn {
+    width: 40%;
+    padding: 1em 0;
+    text-align: center;
+    border: none;
+    background-color: #002159;
+    color: #ffffff;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 3px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-color: #002159;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__copyright {
+    font-size: 0.9em;
+    color: #ffffff;
+    opacity: 1;
+}
+
+
+/* iPhone 6/7/8 & Plus */
+@media screen and (min-width: 375px) and (max-width: 416px) {
+    .login__container {
+        width: 80%;
+        height: 55%
+    }
+
+    .form__group {
+        margin-bottom: 5px;
+    }
+
+    .form__login-btn {
+        width: 30%;
+        padding: .6em 0;
+        font-size: .8em;
+    }
 }
