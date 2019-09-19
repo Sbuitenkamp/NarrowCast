@@ -22,10 +22,8 @@ $_SESSION['csrf-token'] = $token->generate();
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./styles/style.css">
+    <script defer src="./controllers/timer.js"></script>
     <title>Narrow Cast - Login</title>
-    <script defer src="js/main.js"></script>
-    <script defer src="js/form-validation.js"></script>
-    <script src="js/fastclick.js"></script>
 </head>
 <body>
 <?php if(!isset($_SESSION['username'])): ?>
@@ -53,6 +51,8 @@ $_SESSION['csrf-token'] = $token->generate();
 <?php endif; ?>
     <div class="footer">
         <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>
+        <div class="footer__timer"><span class="footer__timer__text"></span></div>
+        <div class="footer__date"><span class="footer__date__text"></span></div>
     </div>     
 </div>
 </body>

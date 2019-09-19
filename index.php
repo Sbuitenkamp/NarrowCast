@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="./styles/style.css">
     <title>Narrow Cast</title>
     <script src="controllers/index.js"></script>
+    <script defer src="controllers/timer.js"></script>
 </head>
 <body>
     <div class="container"></div>
-    <div class="footer"></div>
+    <div class="footer">
+        <div class="footer__timer"><span class="footer__timer__text"></span></div>
+        <div class="footer__date"><span class="footer__date__text"></span></div>
+    </div>
 </body>
 </html>
