@@ -40,37 +40,46 @@ class Db
     // put all your options in one array with the same order
     public function select($options = [])
     {
-        [
-            $values, // array
-            $table, // string
-            $conditions, // assoc array
-            $limit // int
-        ] = $options;
-        $con = $this->connect();
-        $query = "SELECT " . join(",", $values) . " FROM " . $table;
-        $query .= $this->where($conditions);
-        if (isset($limit)) $query .= " LIMIT " . $limit;
-        $query .= ";";
-        $prepared = $con->prepare($query);
-        $prepared->execute();
-        return $prepared->fetchAll();
+        try {
+            [
+                $values, // array
+                $table, // string
+                $conditions, // assoc array
+                $limit // int
+            ] = $options;
+            $con = $this->connect();
+            $query = "SELECT " . join(",", $values) . " FROM " . $table;
+            $query .= $this->where($conditions);
+            if (isset($limit)) $query .= " LIMIT " . $limit;
+            $query .= ";";
+            echo $query . "\n";
+            $prepared = $con->prepare($query);
+            $prepared->execute();
+            return $prepared->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $err) {
+            throw $err;
+        }
     }
 
     public function update($options = [])
     {
-        [
-            $values, // assoc array
-            $table, // string
-            $conditions // assoc array
-        ] = $options;
-        $con = $this->connect();
-        $query = "UPDATE " . $table . " SET ";
-        foreach ($values as $col => $value) $query .= $col . " = " . $value . ", ";
-        $query = trim(substr_replace($query ,"", -2));
-        $query .= $this->where($conditions);
-        $query .= ";";
-        $prepared = $con->prepare($query);
-        $prepared->execute();
-        return $prepared->fetchAll();
+        try {
+            [
+                $values, // assoc array
+                $table, // string
+                $conditions // assoc array
+            ] = $options;
+            $con = $this->connect();
+            $query = "UPDATE " . $table . " SET ";
+            foreach ($values as $col => $value) $query .= $col . " = " . $value . ", ";
+            $query = trim(substr_replace($query, "", -2));
+            $query .= $this->where($conditions);
+            $query .= ";";
+            $prepared = $con->prepare($query);
+            $prepared->execute();
+            return $prepared->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $err) {
+            throw $err;
+        }
     }
 }

@@ -1,10 +1,9 @@
 <?php
 
-include_once './models/Db.php';
-include_once './models/User.php';
+require_once './models/Db.php';
+require_once './models/User.php';
 
 $db = new Db();
-$db->connect();
 
 ?>
 <!doctype html>
