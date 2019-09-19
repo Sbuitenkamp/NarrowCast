@@ -15,7 +15,7 @@ class User
 
     public function login() 
     { 
-        header("location: index.php");
+        header("location: admin.php");
     }
 
     public function authenticate() 
@@ -27,19 +27,24 @@ class User
     {
         $stmt = $this->db->connect()->prepare("SELECT username, password FROM users WHERE username = ?");
         if ($stmt->execute(array($this->username))) {
-            if ($row = $stmt->fetch()) $this->verifyPassword($row['password']);
-        } else {
-            header("location: login.php?username=USERNAME&password=PASSWORD");
-            exit();
-        }
+            if ($row = $stmt->fetch()) {
+                $this->verifyPassword($row['password']);
+                exit();
+            } else {
+                header("location: login.php?username=USERNAME&password=PASSWORD");
+                exit();
+            }
+        } 
     }
 
     public function verifyPassword($userPassword)
     {
-        $this->userId = $userId;
+        $token_length = 32;
+
         if (password_verify($this->password, $userPassword)) {
             $_SESSION['username'] = $this->username;
             $_SESSION['valid_until'] = time() + 60*60;
+            $_SESSION['csrf-token'] = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $token_length);
             $this->login();
             exit();
         } else {
