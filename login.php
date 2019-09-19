@@ -1,11 +1,10 @@
 <?php
-require './models/Db.php';
-
+require_once './models/Db.php';
+require_once './models/User.php';
 session_unset();
 session_destroy();
 
 $db = new Db();
-$db->connect();
 
 ?>
 <!doctype html>

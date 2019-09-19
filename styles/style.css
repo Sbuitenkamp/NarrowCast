@@ -2,6 +2,11 @@
 
 /*carousel animations*/
 
+/*misc*/
+.hidden {
+    display: none;
+}
+
 /*reset the browser*/
 * {
     margin: 0;
