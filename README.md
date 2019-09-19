@@ -6,4 +6,6 @@ Download and run the installer or run the manual install, make sure you have the
 Also make sure you have the [composer CLI in your PATH]("https://www.computerhope.com/issues/ch000549.htm") variable.
 Once you have installed Composer, run `composer install` in the project directory to install the dependencies in this project.
 
+Now run `php server.php` in a terminal in the project directory to run the websocket server. You can now connect to the websocket.
+
 \- Steven
