@@ -34,7 +34,7 @@ class Server implements MessageComponentInterface
      * @param string $message
      * @throws Exception
      */
-    public function onMessage(Connection $connection, $message)
+    public function onMessage(Connection $connection, $message) // yes this method is pretty long..... meh
     {
         try {
             $message = json_decode($message, true);
@@ -47,30 +47,56 @@ class Server implements MessageComponentInterface
                         1 // limit
                     ]);
                     $dataToSend = [
+                        "type" => "html",
                         "html" => $this->loadModule($data[0]["name"]),
-                        "timeout" => $data[0]["timeout"],
-                        "type" => "html"
+                        "timeout" => $data[0]["timeout"]
                     ];
                     $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
                 case "init":
                     $data = $this->db->select([
-                        ["name", "timeout"], // values
+                        ["name", "timeout", "activated"], // values
                         "modules", // table
                         ["activated" => true], // conditions
                         1 // limit
                     ]);
-                    $settings = $this->db->select([
-                        ["current_animation AS currentAnimation", "load_order AS loadOrder", "people_watched AS peopleWatched"], // values
-                        "general_settings", // table
-                        [], // conditions
-                        1 // limit
-                    ]);
+                    $settings = $this->getSettings();
                     $dataToSend = [
+                        "type" => "html",
                         "html" => $this->loadModule($data[0]["name"]),
                         "timeout" => $data[0]["timeout"],
-                        "type" => "html",
                         "settings" => $settings[0]
+                    ];
+                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    break;
+                case "admin":
+                    $data = $this->db->select([
+                        ["*"], // values
+                        "modules", // table
+                        [], // conditions
+                        null
+                    ]);
+                    $settings = $this->getSettings();
+                    $dataToSend = [
+                        "type" => "admin",
+                        "moduleSettings" => $data,
+                        "generalSettings" => $settings[0]
+                    ];
+                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    break;
+                case "updateModule":
+                    $params = [
+                        [], // values
+                        "modules", // table
+                        ["id" => $message["id"]] // conditions
+                    ];
+                    foreach ($message["values"] as $key => $value) {
+                        if ($key === "name") $value = "'" . $value . "'";
+                        $params[0][$key] = $value;
+                    }
+                    $dataToSend = [
+                        "type" => "updateResult",
+                        "result" => $this->db->update($params),
                     ];
                     $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
@@ -105,5 +131,15 @@ class Server implements MessageComponentInterface
         ob_start();
         include __DIR__ . "\..\modules\\". $url . "\index.php";
         return ob_get_clean();
+    }
+
+    private function getSettings()
+    {
+        return $this->db->select([
+            ["current_animation AS currentAnimation", "load_order AS loadOrder", "people_watched AS peopleWatched"], // values
+            "general_settings", // table
+            [], // conditions
+            1 // limit
+        ]);
     }
 }
