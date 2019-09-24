@@ -8,7 +8,6 @@ session_destroy();
 
 $db = new Db();
 
-$user = new User();
 $token = new Token();
 
 $db->connect();
@@ -51,8 +50,8 @@ $_SESSION['csrf-token'] = $token->generate();
 <?php endif; ?>
     <div class="footer">
         <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>
-        <div class="footer__timer"><span class="footer__timer__text"></span></div>
-        <div class="footer__date"><span class="footer__date__text"></span></div>
+        <!-- <div class="footer__timer"><span class="footer__timer__text"></span></div>
+        <div class="footer__date"><span class="footer__date__text"></span></div> -->
     </div>     
 </div>
 </body>

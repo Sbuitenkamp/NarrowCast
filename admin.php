@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
     <body>
     
     <div class="footer">
-        <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>'
+        <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>
     </div>
     </body>
     </html>
