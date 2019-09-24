@@ -23,13 +23,21 @@ if (isset($_SESSION['username'])) {
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="./styles/style.css">
+        <script src="./controllers/admin.js"></script>
         <title>Narrow Cast</title>
     </head>
     <body>
-    
-    <div class="footer">
-        <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>
-    </div>
+        <!--todo add styling, teshale ples UwU-->
+        <div class="header">
+            <h1>Narrowcast Admin Panel</h1>
+            <p><?=$_SESSION['username'];?></p>
+            <button onclick="logOut();">Log Uit</button>
+        </div>
+        <div class="animations-container"></div>
+        <div class="settings-container"></div>
+        <div class="footer">
+            <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>'
+        </div>
     </body>
     </html>
 <?php endif; ?>

@@ -80,9 +80,10 @@ class Db
             $query = trim(substr_replace($query, "", -2));
             $query .= $this->where($conditions);
             $query .= ";";
+            echo $query . "\n";
             $prepared = $con->prepare($query);
             $prepared->execute();
-            return $prepared->fetchAll(PDO::FETCH_ASSOC);
+            return $prepared->rowCount();
         } catch (PDOException $err) {
             throw $err;
         }
