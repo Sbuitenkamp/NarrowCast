@@ -100,6 +100,18 @@ class Server implements MessageComponentInterface
                     ];
                     $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
+                case "updateAnimation":
+                    $params = [
+                        ["current_animation" => $message["animation"]], //values
+                        "general_settings", //table
+                        ["id" => 1] //conditions
+                    ];
+                    $dataToSend = [
+                        "type" => "updateModule",
+                        "result" => $this->db->update($params)
+                        ];
+                        $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    break;
                 default:
                     throw new Exception("Invalid POST type. (this is a human made error message)");
             }
