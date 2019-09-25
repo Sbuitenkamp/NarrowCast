@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/footer.css">
     <title>Narrow Cast</title>
-    <script src="controllers/index.js"></script>
-    <script defer src="controllers/timer.js"></script>
+    <script defer src="./controllers/main.js"></script>
+    <script defer src="./controllers/index.js"></script>
+    <script defer src="./controllers/timer.js"></script>
 </head>
 <body>
     <div class="container"></div>

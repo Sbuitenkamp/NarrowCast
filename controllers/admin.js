@@ -1,44 +1,69 @@
-let settings;
-const conn = new WebSocket('ws://localhost:8080');
-conn.onopen = e => {
-    console.log("Connection established!");
-    conn.send(JSON.stringify({
-        type: "admin"
-    }));
+// global vars
+const Sortable = require("sortablejs");
+let order = [];
+const sortContainer = document.querySelector('div.sort-container>ul.sort-container__list');
+const sortItemContainer = document.querySelector('div.sort-items>ul.sort-items__list');
+const container = document.querySelector('div.settings-container');
+console.log(sortContainer);
+console.log(sortItemContainer);
+
+// sortable
+const sortable = new Sortable(sortContainer, {
+    animation: 150,
+    group: 'shared',
+    onRemove: evt => {
+        // console.log(evt);
+    },
+});
+const sortList = new Sortable(sortItemContainer, {
+    animation: 150,
+    group: {
+        name: 'shared',
+        pull: 'clone',
+        put: false
+    },
+    sort: false,
+    onClone: evt => {
+        console.log(evt);
+        evt.item.innerHTML += '<button onclick="deleteElement(this);"><i class="fa fa-times"></i></button>';
+    }
+});
+
+// websocket
+conn.onopen = () => {
+    console.log('Connection established!');
+    conn.send(JSON.stringify({ type: 'admin' }));
 };
 conn.onmessage = e => {
     const data = JSON.parse(e.data);
-    if (data.type === "admin") {
-        const container = document.querySelector("div.settings-container");
+    // console.log(data);
+    if (data.type === 'admin') {
+        // order
+        loadSortedItems(data);
+        // setting panels
         for (const setting of data.moduleSettings) {
-            // todo: add frequency
             container.innerHTML += `
                 <div class="settings-container__item">
-                    <form action="">
+                    <form class="module" action="">
                         <input type="text" name="id" value="${setting.id}" hidden>
                         <input type="text" name="name" value="${setting.name}">
                         <input type="radio" name="activated" value="1" ${setting.activated ? "checked" : null}>Geactiveerd
                         <input type="radio" name="activated" value="0" ${!setting.activated ? "checked" : null}>Gedeactiveerd
                         Interval in seconden: <input type="text" name="timeout" value="${setting.timeout}">
-                        <button type="button" onclick="onClick(this)">Opslaan</button>
+                        <button type="button" onclick="submitModule(this)">Opslaan</button>
                     </form>
                 </div>
             `;
+            loadSortItems(setting);
+
         }
-    } else if (data.type === "updateResult") {
-        if (data.result) console.log("Success"); // todo add visible success message (*cough* teshale)
-        else console.log("no changes made");
+    } else if (data.type === 'updatedModule') {
+        sortItemContainer.innerHTML = '';
+        loadSortedItems(data);
+        for (const setting of data.moduleSettings) loadSortItems(setting);
+        orderOnClick();
     }
 };
-
-function onClick(element) {
-    const data = { type: "updateModule" };
-    data.values = formToJSON(element.parentElement.children);
-    data.id = Number(data.values.id);
-    delete data.values.id;
-    data.values.activated = Number(data.values.activated);
-    conn.send(JSON.stringify(data));
-}
 
 function changeAnimation(element) {
     const data = formToJSON(element.parentElement.children);
@@ -46,21 +71,18 @@ function changeAnimation(element) {
     conn.send(JSON.stringify(data));
 }
 
-function logOut() {
-    console.log("todo lmao");
-}
-
-// form to json again, if you touch this: your dreams, haunted
-const isValidElement = element => element.name && element.value;
-const isValidValue = element => (!['checkbox', 'radio'].includes(element.type) || element.checked);
-const isCheckbox = element => element.type === 'checkbox';
-const getSelectValues = options => [].reduce.call(options, (values, option) => option.selected ? values.concat(option.value) : values, []);
-const isMultiSelect = element => element.options && element.multiple;
-const formToJSON = elements => [].reduce.call(elements, (data, element) => {
-    if (isValidElement(element) && isValidValue(element)) {
-        if (isCheckbox(element)) data[element.name] = (data[element.name] || []).concat(element.value);
-        else if (isMultiSelect(element)) data[element.name] = getSelectValues(element);
-        else data[element.name] = element.value;
+function loadSortedItems(data) {
+    sortContainer.innerHTML = '';
+    order = data.generalSettings.loadOrder.split(/,+/g).map(item => Number(item));
+    for (const id of order) {
+        const moduleSetting = data.moduleSettings.find(e => e.id === id);
+        console.log(moduleSetting);
+        if (moduleSetting.activated) sortContainer.innerHTML += `
+            <li class='sort-container__list__item'>
+                <span hidden>${id}</span>
+                ${moduleSetting.name}
+                <button onclick="deleteElement(this);"><i class="fa fa-times"></i></button>
+            </li>
+        `;
     }
-    return data;
-}, {});
+}
