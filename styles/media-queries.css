@@ -1,0 +1,44 @@
+/* IPHONE 5/SE */
+@media screen and (min-width: 280px) and (max-width: 374px) {
+    .login__container {
+        width: 80%;
+        height: 55%
+    }
+}
+
+/* IPHONE 6/7/8 */
+@media screen and (min-width: 375px) and (max-width: 413px) {
+    .login__container {
+        width: 80%;
+        height: 58%
+    }
+
+    .form__group {
+        margin-bottom: 5px;
+    }
+
+}
+
+/* IPHONE 6/7/8 PLUS */
+@media screen and (min-width: 414px) and (max-width: 767px ) {
+    .login__container {
+        width: 80%;
+        height: 58%
+    }
+}
+
+/* PIXEL 1/2 */
+@media screen and (min-height: 731px) {
+    .login__container {
+        width: 80%;
+        height: 50%
+    }
+}
+
+/* PIXEL 1/2 XL */
+@media screen and (min-height: 812px) {
+    .login__container {
+        width: 80%;
+        height: 45%
+    }
+}
