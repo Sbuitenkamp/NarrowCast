@@ -28,7 +28,14 @@ function deleteElement(element) {
 }
 
 function logOut() {
-    console.log('todo lmao');
+    window.location = '/logout.php';
+}
+
+function changeAnimation(element) {
+    const data = formToJSON(element.parentElement.children);
+    data.type = "updateAnimation";
+    console.log(data);
+    conn.send(JSON.stringify(data));
 }
 
 // form to json. again, if you touch this: your dreams, haunted
