@@ -39,6 +39,14 @@ conn.onmessage = e => {
     const data = JSON.parse(e.data);
     // console.log(data);
     if (data.type === 'admin') {
+        // animations
+        const animation = data.generalSettings.currentAnimation.toString();
+        document.querySelector('form.animations-container').innerHTML += `
+            <input type="radio" value="0" name="animation" ${animation === '0' ? 'checked' : ''}>Geen
+            <input type="radio" value="1" name="animation" ${animation === '1' ? 'checked' : ''}>Fade
+            <input type="radio" value="2" name="animation" ${animation === '2' ? 'checked' : ''}>Swipe
+            <button type="button" onclick="changeAnimation(this)">Verstuur</button>
+        `;
         // order
         loadSortedItems(data);
         // setting panels
@@ -90,6 +98,7 @@ function loadSortedItems(data) {
         `;
     }
 }
+
 },{"sortablejs":2}],2:[function(require,module,exports){
 /**!
  * Sortable 1.10.0
