@@ -28,7 +28,11 @@ if (isset($_SESSION['username'])) {
         <link rel="stylesheet" href="./styles/header.css">
         <link rel="stylesheet" href="./styles/footer.css">
         <link rel="stylesheet" href="./styles/style.css">
-        <script src="./controllers/admin.js"></script>
+        <link rel="stylesheet" href="./styles/admin.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--IMPORTANT: main needs to be loaded first-->
+        <script defer src="./controllers/main.js"></script>
+        <script defer src="./controllers/admin-bundle.js"></script>
         <title>Narrow Cast</title>
     </head>
     <body>
@@ -47,6 +51,16 @@ if (isset($_SESSION['username'])) {
                 <input type="radio" value="2" name="animation">Swipe
                 <button type="button" onclick="changeAnimation(this)">Verstuur</button>
             </form>
+        </div>
+        <div class="animations-container"></div>
+        <div class="sort">
+            <div class="sort-container">
+                <ul class="sort-container__list"></ul>
+            </div>
+            <div class="sort-items">
+                <ul class="sort-items__list"></ul>
+            </div>
+            <button onclick="orderOnClick()">Opslaan</button>
         </div>
         <div class="settings-container"></div>
         <div class="footer">

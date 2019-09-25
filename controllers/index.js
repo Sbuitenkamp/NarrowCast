@@ -1,12 +1,8 @@
 let settings;
-let order = [];
 let prevIndex = 0;
-const conn = new WebSocket('ws://localhost:8080');
-conn.onopen = e => {
+conn.onopen = () => {
     console.log("Connection established!");
-    conn.send(JSON.stringify({
-        type: "init"
-    }));
+    conn.send(JSON.stringify({ type: "init" }));
 };
 
 conn.onmessage = e => {
