@@ -65,13 +65,10 @@ conn.onmessage = e => {
     }
 };
 
-function loadSortItems(setting) {
-    if (setting.activated) sortItemContainer.innerHTML += `
-        <li class="sort-items__list__item">
-            <span hidden>${setting.id}</span>
-            ${setting.name}
-        </li>
-    `;
+function changeAnimation(element) {
+    const data = formToJSON(element.parentElement.children);
+    data.type = "updateAnimation";
+    conn.send(JSON.stringify(data));
 }
 
 function loadSortedItems(data) {

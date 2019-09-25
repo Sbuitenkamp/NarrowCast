@@ -22,6 +22,11 @@ if (isset($_SESSION['username'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="./styles/reset.css">
+        <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/admin.css">
+        <link rel="stylesheet" href="./styles/header.css">
+        <link rel="stylesheet" href="./styles/footer.css">
         <link rel="stylesheet" href="./styles/style.css">
         <link rel="stylesheet" href="./styles/admin.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,9 +38,19 @@ if (isset($_SESSION['username'])) {
     <body>
         <!--todo add styling, teshale ples UwU-->
         <div class="header">
-            <h1>Narrowcast Admin Panel</h1>
-            <p><?=$_SESSION['username'];?></p>
-            <button onclick="logOut();">Log Uit</button>
+            <h2 class="header__title">Narrowcast Admin Panel</h2>
+            <div class="header__logout-container">
+                <p class="username"><?=$_SESSION['username'];?></p>
+                <button class="logout-btn" onclick="logOut();">Log Uit</button>
+            </div>
+        </div>
+        <div class="animations-container">
+            <form action="">
+                <input type="radio" value="0" name="animation">Geen
+                <input type="radio" value="1" name="animation">Fade
+                <input type="radio" value="2" name="animation">Swipe
+                <button type="button" onclick="changeAnimation(this)">Verstuur</button>
+            </form>
         </div>
         <div class="animations-container"></div>
         <div class="sort">
@@ -49,7 +64,7 @@ if (isset($_SESSION['username'])) {
         </div>
         <div class="settings-container"></div>
         <div class="footer">
-            <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>'
+            <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>
         </div>
     </body>
     </html>
