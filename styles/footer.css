@@ -1,0 +1,17 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.6em;
+    background-color: #002159;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.footer__copyright {
+    font-size: 0.9rem;
+    opacity: 1;
+}
