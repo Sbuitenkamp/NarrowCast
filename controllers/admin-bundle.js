@@ -24,9 +24,8 @@ const sortList = new Sortable(sortItemContainer, {
         put: false
     },
     sort: false,
-    onClone: evt => {
-        console.log(evt);
-        evt.item.innerHTML += '<button onclick="deleteElement(this);"><i class="fa fa-times"></i></button>';
+    onEnd: evt => {
+        if (evt.from !== evt.to) evt.item.innerHTML += '<button onclick="deleteElement(this);"><i class="fa fa-times"></i></button>';
     }
 });
 
