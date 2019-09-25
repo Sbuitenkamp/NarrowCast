@@ -40,8 +40,14 @@ if (isset($_SESSION['username'])) {
                 <button class="logout-btn" onclick="logOut();">Log Uit</button>
             </div>
         </div>
-        
-        <div class="animations-container"></div>
+        <div class="animations-container">
+            <form action="">
+                <input type="radio" value="0" name="animation">Geen
+                <input type="radio" value="1" name="animation">Fade
+                <input type="radio" value="2" name="animation">Swipe
+                <button type="button" onclick="changeAnimation(this)">Verstuur</button>
+            </form>
+        </div>
         <div class="settings-container"></div>
         <div class="footer">
             <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>

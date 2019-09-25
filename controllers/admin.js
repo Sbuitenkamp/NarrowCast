@@ -40,6 +40,12 @@ function onClick(element) {
     conn.send(JSON.stringify(data));
 }
 
+function changeAnimation(element) {
+    const data = formToJSON(element.parentElement.children);
+    data.type = "updateAnimation";
+    conn.send(JSON.stringify(data));
+}
+
 function logOut() {
     console.log("todo lmao");
 }
