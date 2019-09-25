@@ -22,6 +22,11 @@ if (isset($_SESSION['username'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="./styles/reset.css">
+        <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/admin.css">
+        <link rel="stylesheet" href="./styles/header.css">
+        <link rel="stylesheet" href="./styles/footer.css">
         <link rel="stylesheet" href="./styles/style.css">
         <script src="./controllers/admin.js"></script>
         <title>Narrow Cast</title>
@@ -29,14 +34,17 @@ if (isset($_SESSION['username'])) {
     <body>
         <!--todo add styling, teshale ples UwU-->
         <div class="header">
-            <h1>Narrowcast Admin Panel</h1>
-            <p><?=$_SESSION['username'];?></p>
-            <button onclick="logOut();">Log Uit</button>
+            <h2 class="header__title">Narrowcast Admin Panel</h2>
+            <div class="header__logout-container">
+                <p class="username"><?=$_SESSION['username'];?></p>
+                <button class="logout-btn" onclick="logOut();">Log Uit</button>
+            </div>
         </div>
+        
         <div class="animations-container"></div>
         <div class="settings-container"></div>
         <div class="footer">
-            <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>'
+            <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>
         </div>
     </body>
     </html>

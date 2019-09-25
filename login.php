@@ -20,8 +20,11 @@ $_SESSION['csrf-token'] = $token->generate();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/style.css">
-    <script defer src="./controllers/timer.js"></script>
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/footer.css">
+    <link rel="stylesheet" href="./styles/media-queries.css">
     <title>Narrow Cast - Login</title>
 </head>
 <body>
@@ -36,10 +39,12 @@ $_SESSION['csrf-token'] = $token->generate();
             <span class="error" id="validation-message"></span>
             <div class="form__group">
                 <input type="text" id="validate-username" name="username" autocomplete="off" required>
+                <span class="underline"></span>
                 <label class="label-float" for="username">Gebruikersnaam</label>
             </div>
             <div class="form__group">
                 <input type="password" id="validate-password" name="password" autocomplete="off" required>
+                <span class="underline"></span>
                 <label class="label-float" for="password">Wachtwoord</label>
             </div>
             <input class="form__login-btn" type="submit" name="login" value="Login">
