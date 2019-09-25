@@ -1,0 +1,7 @@
+.sort {
+    width: 50%;
+}
+.sort-container, .sort-items {
+    width: 50%;
+    float: left;
+}

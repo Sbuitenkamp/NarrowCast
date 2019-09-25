@@ -70,18 +70,8 @@ class Server implements MessageComponentInterface
                     $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
                 case "admin":
-                    $data = $this->db->select([
-                        ["*"], // values
-                        "modules", // table
-                        [], // conditions
-                        null
-                    ]);
-                    $settings = $this->getSettings();
-                    $dataToSend = [
-                        "type" => "admin",
-                        "moduleSettings" => $data,
-                        "generalSettings" => $settings[0]
-                    ];
+                    $dataToSend = $this->initAdmin();
+                    $dataToSend["type"] = "admin";
                     $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
                 case "updateModule":
@@ -94,8 +84,24 @@ class Server implements MessageComponentInterface
                         if ($key === "name") $value = "'" . $value . "'";
                         $params[0][$key] = $value;
                     }
+                    $this->db->update($params);
+                    // init again
+                    $dataToSend = $this->initAdmin();
+                    $dataToSend["type"] = "updatedModule";
+                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    break;
+                case "updateSettings":
+                    $params = [
+                        [], // values
+                        "general_settings", // table
+                        ["id" => 1] // conditions
+                    ];
+                    foreach ($message["values"] as $key => $value) {
+                        if ($key === "load_order") $value = "'" . $value . "'";
+                        $params[0][$key] = $value;
+                    }
                     $dataToSend = [
-                        "type" => "updateResult",
+                        "type" => "updatedSettings",
                         "result" => $this->db->update($params),
                     ];
                     $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
@@ -133,6 +139,7 @@ class Server implements MessageComponentInterface
         return ob_get_clean();
     }
 
+    // get the general settings
     private function getSettings()
     {
         return $this->db->select([
@@ -141,5 +148,22 @@ class Server implements MessageComponentInterface
             [], // conditions
             1 // limit
         ]);
+    }
+
+    // get settings + all modulesettings
+    private function initAdmin()
+    {
+        $modules = $this->db->select([
+            ["*"], // values
+            "modules", // table
+            [], // conditions
+            null
+        ]);
+        $settings = $this->getSettings();
+        return [
+            "moduleSettings" => $modules,
+            "generalSettings" => $settings[0],
+            "type" => ''
+        ];
     }
 }

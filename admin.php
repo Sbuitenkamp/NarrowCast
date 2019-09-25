@@ -23,7 +23,11 @@ if (isset($_SESSION['username'])) {
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="./styles/style.css">
-        <script src="./controllers/admin.js"></script>
+        <link rel="stylesheet" href="./styles/admin.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--IMPORTANT: main needs to be loaded first-->
+        <script defer src="./controllers/main.js"></script>
+        <script defer src="./controllers/admin-bundle.js"></script>
         <title>Narrow Cast</title>
     </head>
     <body>
@@ -34,6 +38,15 @@ if (isset($_SESSION['username'])) {
             <button onclick="logOut();">Log Uit</button>
         </div>
         <div class="animations-container"></div>
+        <div class="sort">
+            <div class="sort-container">
+                <ul class="sort-container__list"></ul>
+            </div>
+            <div class="sort-items">
+                <ul class="sort-items__list"></ul>
+            </div>
+            <button onclick="orderOnClick()">Opslaan</button>
+        </div>
         <div class="settings-container"></div>
         <div class="footer">
             <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>'
