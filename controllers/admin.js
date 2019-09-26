@@ -4,16 +4,11 @@ let order = [];
 const sortContainer = document.querySelector('div.sort-container>ul.sort-container__list');
 const sortItemContainer = document.querySelector('div.sort-items>ul.sort-items__list');
 const container = document.querySelector('div.settings-container');
-console.log(sortContainer);
-console.log(sortItemContainer);
 
 // sortable
 const sortable = new Sortable(sortContainer, {
     animation: 150,
-    group: 'shared',
-    onRemove: evt => {
-        // console.log(evt);
-    },
+    group: 'shared'
 });
 const sortList = new Sortable(sortItemContainer, {
     animation: 150,
@@ -35,7 +30,6 @@ conn.onopen = () => {
 };
 conn.onmessage = e => {
     const data = JSON.parse(e.data);
-    // console.log(data);
     if (data.type === 'admin') {
         // animations
         const animation = data.generalSettings.currentAnimation.toString();
@@ -48,27 +42,16 @@ conn.onmessage = e => {
         // order
         loadSortedItems(data);
         // setting panels
-        for (const setting of data.moduleSettings) {
-            container.innerHTML += `
-                <div class="settings-container__item">
-                    <form class="module" action="">
-                        <input type="text" name="id" value="${setting.id}" hidden>
-                        <input type="text" name="name" value="${setting.name}">
-                        <input type="radio" name="activated" value="1" ${setting.activated ? "checked" : null}>Geactiveerd
-                        <input type="radio" name="activated" value="0" ${!setting.activated ? "checked" : null}>Gedeactiveerd
-                        Interval in seconden: <input type="text" name="timeout" value="${setting.timeout}">
-                        <button type="button" onclick="submitModule(this)">Opslaan</button>
-                    </form>
-                </div>
-            `;
-            loadSortItems(setting);
-
-        }
+        loadModules(data);
     } else if (data.type === 'updatedModule') {
-        sortItemContainer.innerHTML = '';
         loadSortedItems(data);
+        sortItemContainer.innerHTML = '';
         for (const setting of data.moduleSettings) loadSortItems(setting);
         orderOnClick();
+    } else if (data.type === 'deletedModule') {
+        loadSortedItems(data);
+        sortItemContainer.innerHTML = '';
+        loadModules(data);
     }
 };
 
@@ -86,7 +69,7 @@ function loadSortedItems(data) {
     order = data.generalSettings.loadOrder.split(/,+/g).map(item => Number(item));
     for (const id of order) {
         const moduleSetting = data.moduleSettings.find(e => e.id === id);
-        console.log(moduleSetting);
+        if (!moduleSetting) continue;
         if (moduleSetting.activated) sortContainer.innerHTML += `
             <li class='sort-container__list__item'>
                 <span hidden>${id}</span>
@@ -94,5 +77,25 @@ function loadSortedItems(data) {
                 <button onclick="deleteElement(this);"><i class="fa fa-times"></i></button>
             </li>
         `;
+    }
+}
+
+function loadModules(data) {
+    container.innerHTML = '';
+    for (const setting of data.moduleSettings) {
+        container.innerHTML += `
+                <div class="settings-container__item">
+                    <form class="module" action="">
+                        <input type="text" name="id" value="${setting.id}" hidden>
+                        <input type="text" name="name" value="${setting.name}">
+                        <input type="radio" name="activated" value="1" ${setting.activated ? "checked" : null}>Geactiveerd
+                        <input type="radio" name="activated" value="0" ${!setting.activated ? "checked" : null}>Gedeactiveerd
+                        Interval in seconden: <input type="text" name="timeout" value="${setting.timeout}">
+                        <button type="button" onclick="submitModule(this)">Opslaan</button>
+                        <button type="button" onclick="deleteModule(this)">Verwijderen</button>
+                    </form>
+                </div>
+            `;
+        loadSortItems(setting);
     }
 }

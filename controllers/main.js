@@ -33,10 +33,24 @@ function logOut() {
 
 function changeAnimation(element) {
     const data = formToJSON(element.parentElement.children);
-    data.type = "updateAnimation";
-    console.log(data);
+    data.type = 'updateAnimation';
     conn.send(JSON.stringify(data));
 }
+
+function createModule(element) {
+    const data = formToJSON(element.children);
+    data.type = 'createModule';
+    conn.send(JSON.stringify(data));
+}
+
+function deleteModule(element) {
+    const data = formToJSON(element.parentElement.children);
+    if (confirm(`Weet u zeker dat u de instellingen voor de module "${data.name}" wilt verwijderen? U moet zelf nog de bestanden uit het systeem halen.`)) {
+        data.type = 'deleteModule';
+        conn.send(JSON.stringify(data));
+    }
+}
+
 
 // form to json. again, if you touch this: your dreams, haunted
 const isValidElement = element => element.name && element.value;
