@@ -113,13 +113,35 @@ class Server implements MessageComponentInterface
                         ["id" => 1] //conditions
                     ];
                     $dataToSend = [
-                        "type" => "updateModule",
+                        "type" => "updatedModule",
                         "result" => $this->db->update($params)
                     ];
                     $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
+                case "createModule":
+                    $params = [
+                        ["name", "activated", "timeout"], // columns
+                        ["'" . $message["name"] . "'", 1, $message["timeout"]], // values
+                        "modules", // table
+                    ];
+                    $dataToSend = [
+                        "type" => "createdModule",
+                        "result" => $this->db->insert($params)
+                    ];
+                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    break;
+                case "deleteModule":
+                    $params = [
+                        "modules", // table
+                        ["id" => $message["id"]] // conditions
+                    ];
+                    $this->db->delete($params);
+                    $dataToSend = $this->initAdmin();
+                    $dataToSend["type"] = "deletedModule";
+                    $this->broadCast(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    break;
                 default:
-                    throw new Exception("Invalid POST type. (this is a human made error message)");
+                    throw new Exception("Invalid message type. (this is a human made error message)");
             }
         } catch (Exception $e) {
             throw $e;
@@ -143,8 +165,13 @@ class Server implements MessageComponentInterface
         $connection->close();
     }
 
+    private function broadCast(string $message)
+    {
+        foreach ($this->connections as $connection) $connection->send($message);
+    }
+
     // returns the file after execution in plaintext html format
-    private function loadModule($url)
+    private function loadModule(string $url)
     {
         ob_start();
         include __DIR__ . "\..\modules\\". $url . "\index.php";

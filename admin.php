@@ -33,7 +33,7 @@ if (isset($_SESSION['username'])) {
         <!--IMPORTANT: main needs to be loaded first-->
         <script defer src="./controllers/main.js"></script>
         <script defer src="./controllers/admin-bundle.js"></script>
-        <title>Narrow Cast</title>
+        <title>Narrow Cast - Admin panel</title>
     </head>
     <body>
         <!--todo add styling, teshale ples UwU-->
@@ -46,6 +46,9 @@ if (isset($_SESSION['username'])) {
         </div>
         <div class="animations-container">
             <form class="animations-container" action=""></form>
+        </div>
+        <div class="add">
+            <a href="./add-module.php" class="add__button">Module Toevoegen</a>
         </div>
         <div class="sort">
             <div class="sort-container">
