@@ -91,7 +91,7 @@ function loadModules(data) {
                         <input type="radio" name="activated" value="1" ${setting.activated ? "checked" : null}>Geactiveerd
                         <input type="radio" name="activated" value="0" ${!setting.activated ? "checked" : null}>Gedeactiveerd
                         Interval in seconden: <input type="text" name="timeout" value="${setting.timeout}">
-                        <button type="button" onclick="submitModule(this)">Opslaan</button>
+                        <button type="button" class="save-button" onclick="submitModule(this)">Opslaan</button>
                         <button type="button" onclick="deleteModule(this)">Verwijderen</button>
                     </form>
                 </div>
