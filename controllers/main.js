@@ -28,7 +28,7 @@ function deleteElement(element) {
 }
 
 function logOut() {
-    window.location = '/logout.php';
+    window.location = './logout.php';
 }
 
 function changeAnimation(element) {

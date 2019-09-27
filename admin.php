@@ -27,8 +27,6 @@ if (isset($_SESSION['username'])) {
         <link rel="stylesheet" href="./styles/admin.css">
         <link rel="stylesheet" href="./styles/header.css">
         <link rel="stylesheet" href="./styles/footer.css">
-        <link rel="stylesheet" href="./styles/style.css">
-        <link rel="stylesheet" href="./styles/admin.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!--IMPORTANT: main needs to be loaded first-->
         <script defer src="./controllers/main.js"></script>
@@ -45,7 +43,9 @@ if (isset($_SESSION['username'])) {
             </div>
         </div>
         <div class="animations-container">
-            <form class="animations-container" action=""></form>
+            <form class="animations-container" action="">
+            <h2>Kies animatie:</h2>
+            </form>
         </div>
         <div class="sort">
             <div class="sort-container">
@@ -54,7 +54,7 @@ if (isset($_SESSION['username'])) {
             <div class="sort-items">
                 <ul class="sort-items__list"></ul>
             </div>
-            <button onclick="orderOnClick()">Opslaan</button>
+            <button class="save-button" onclick="orderOnClick()">Opslaan</button>
         </div>
         <div class="settings-container"></div>
         <div class="footer">

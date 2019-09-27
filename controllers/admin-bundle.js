@@ -42,10 +42,10 @@ conn.onmessage = e => {
         // animations
         const animation = data.generalSettings.currentAnimation.toString();
         document.querySelector('form.animations-container').innerHTML += `
-            <input type="radio" value="0" name="animation" ${animation === '0' ? 'checked' : ''}>Geen
-            <input type="radio" value="1" name="animation" ${animation === '1' ? 'checked' : ''}>Fade
-            <input type="radio" value="2" name="animation" ${animation === '2' ? 'checked' : ''}>Swipe
-            <button type="button" onclick="changeAnimation(this)">Verstuur</button>
+            <input type="radio" value="0" name="animation" ${animation === '0' ? 'checked' : ''}><span>Geen</span>
+            <input type="radio" value="1" name="animation" ${animation === '1' ? 'checked' : ''}><span>Fade</span>
+            <input type="radio" value="2" name="animation" ${animation === '2' ? 'checked' : ''}><span>Swipe</span>
+            <button type="button" class="save-button" onclick="changeAnimation(this)">Opslaan</button>
         `;
         // order
         loadSortedItems(data);
@@ -55,11 +55,11 @@ conn.onmessage = e => {
                 <div class="settings-container__item">
                     <form class="module" action="">
                         <input type="text" name="id" value="${setting.id}" hidden>
-                        <input type="text" name="name" value="${setting.name}">
+                        <input type="text" class="module-title" name="name" value="${setting.name}">
                         <input type="radio" name="activated" value="1" ${setting.activated ? "checked" : null}>Geactiveerd
                         <input type="radio" name="activated" value="0" ${!setting.activated ? "checked" : null}>Gedeactiveerd
-                        Interval in seconden: <input type="text" name="timeout" value="${setting.timeout}">
-                        <button type="button" onclick="submitModule(this)">Opslaan</button>
+                        <p>Interval in seconden:</p> <input type="text" name="timeout" value="${setting.timeout}">
+                        <button type="button" class="save-button" onclick="submitModule(this)">Opslaan</button>
                     </form>
                 </div>
             `;
