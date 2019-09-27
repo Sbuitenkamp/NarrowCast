@@ -163,3 +163,20 @@
     right: 2rem;
     bottom: -.5rem;
 }
+
+.add {
+    margin-bottom: 20px;
+}
+
+.add__button {
+    border: none;
+    padding: .8em 1.2em;
+    background-color:#002159;
+    color:#ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: .8rem;
+    text-decoration: none;
+}

@@ -47,9 +47,6 @@ if (isset($_SESSION['username'])) {
             <h2>Kies animatie:</h2>
             </form>
         </div>
-        <div class="add">
-            <a href="./add-module.php" class="add__button">Module Toevoegen</a>
-        </div>
         <div class="sort">
             <div class="sort-container">
                 <ul class="sort-container__list"></ul>
@@ -57,12 +54,12 @@ if (isset($_SESSION['username'])) {
             <div class="sort-items">
                 <ul class="sort-items__list"></ul>
             </div>
+            <div class="add">
+                <a href="./add-module.php" class="add__button">Module Toevoegen</a>
+            </div>
             <button class="save-button" onclick="orderOnClick()">Opslaan</button>
         </div>
         <div class="settings-container"></div>
-        <div class="footer">
-            <span class="footer__copyright">Copyright © 2019 ROC Friesepoort</span>
-        </div>
     </body>
     </html>
 <?php endif; ?>
