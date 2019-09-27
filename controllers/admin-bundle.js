@@ -58,7 +58,6 @@ conn.onmessage = e => {
             `;
             loadSortItems(setting);
         }
-        loadModules(data);
     } else if (data.type === 'updatedModule') {
         loadSortedItems(data);
         sortItemContainer.innerHTML = '';
