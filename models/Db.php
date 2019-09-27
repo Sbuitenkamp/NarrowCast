@@ -43,6 +43,25 @@ class Db
     }
 
     // put all your options in one array with the same order
+    public function insert($options = [])
+    {
+        try {
+            [
+                $columns, // array
+                $values, // array
+                $table, // string
+            ] = $options;
+            $con = $this->connect();
+            $query = "INSERT INTO " . $table . "(" . join(",", $columns) . ")" . " VALUES (" . join(",", $values) . ");";
+            echo $query . "\n";
+            $prepared = $con->prepare($query);
+            $prepared->execute();
+            return $prepared->rowCount();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
+        }
+    }
+
     public function select($options = [])
     {
         try {
@@ -61,8 +80,8 @@ class Db
             $prepared = $con->prepare($query);
             $prepared->execute();
             return $prepared->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $err) {
-            throw $err;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
 
@@ -84,8 +103,28 @@ class Db
             $prepared = $con->prepare($query);
             $prepared->execute();
             return $prepared->rowCount();
-        } catch (PDOException $err) {
-            throw $err;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
+        }
+    }
+
+    public function delete($options = [])
+    {
+        try {
+            [
+                $table, // string
+                $conditions // assoc array
+            ] = $options;
+            $con = $this->connect();
+            $query = "DELETE FROM " . $table;
+            $query .= $this->where($conditions);
+            $query .= ";";
+            echo $query . "\n";
+            $prepared = $con->prepare($query);
+            $prepared->execute();
+            return $prepared->rowCount();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
 }
