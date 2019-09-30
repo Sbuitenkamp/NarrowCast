@@ -52,7 +52,7 @@ class Db
                 $table, // string
             ] = $options;
             $con = $this->connect();
-            $query = "INSERT INTO " . $table . "(" . join(",", $columns) . ")" . " VALUES (" . join(",", $values) . ");";
+            $query = "INSERT INTO " . $table . " (" . join(",", $columns) . ")" . " VALUES (" . join(",", $values) . ");";
             echo $query . "\n";
             $prepared = $con->prepare($query);
             $prepared->execute();

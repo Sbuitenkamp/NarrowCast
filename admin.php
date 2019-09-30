@@ -6,8 +6,8 @@ $db = new Db();
 $logged_in = false;
 $uri = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-if (isset($_SESSION['username'])) {
-    if (!$_SESSION['valid_until'] >= time()) $logged_in = false;
+if (isset($_SESSION["username"])) {
+    if (!$_SESSION["valid_until"] >= time()) $logged_in = false;
     $logged_in = true;
 }
 ?>
@@ -34,12 +34,12 @@ if (isset($_SESSION['username'])) {
         <title>Narrow Cast - Admin panel</title>
     </head>
     <body>
-        <!--todo add styling, teshale ples UwU-->
         <div class="header">
             <h2 class="header__title">Narrowcast Admin Panel</h2>
             <div class="header__logout-container">
                 <p class="username"><?=$_SESSION['username'];?></p>
                 <button class="logout-btn" onclick="logOut();">Log Uit</button>
+                <a class="add-user-btn" href="./add-user.php">Voeg gebruiker toe</a>
             </div>
         </div>
         <div class="animations-container">

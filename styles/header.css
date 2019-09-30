@@ -25,7 +25,7 @@
     font-weight: 500;
 }
 
-.header__logout-container .logout-btn {
+.header__logout-container .logout-btn, .header__logout-container .add-user-btn {
     border: none;
     background-color: #EA0027;
     color: #ffffff;
