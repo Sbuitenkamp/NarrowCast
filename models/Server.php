@@ -88,7 +88,7 @@ class Server implements MessageComponentInterface
                     // init again
                     $dataToSend = $this->initAdmin();
                     $dataToSend["type"] = "updatedModule";
-                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    $this->broadCast(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
                 case "updateSettings":
                     $params = [
@@ -104,7 +104,7 @@ class Server implements MessageComponentInterface
                         "type" => "updatedSettings",
                         "result" => $this->db->update($params),
                     ];
-                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    $this->broadCast(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
                 case "updateAnimation":
                     $params = [
@@ -116,7 +116,7 @@ class Server implements MessageComponentInterface
                         "type" => "updatedModule",
                         "result" => $this->db->update($params)
                     ];
-                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    $this->broadCast(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
                 case "createModule":
                     $params = [
@@ -128,7 +128,7 @@ class Server implements MessageComponentInterface
                         "type" => "createdModule",
                         "result" => $this->db->insert($params)
                     ];
-                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    $this->broadCast(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
                 case "deleteModule":
                     $params = [
@@ -139,6 +139,15 @@ class Server implements MessageComponentInterface
                     $dataToSend = $this->initAdmin();
                     $dataToSend["type"] = "deletedModule";
                     $this->broadCast(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    break;
+                case "createUser":
+                    $params = [
+                        ["username", "password"], // columns
+                        ["'" . $message["username"] . "'", "'" .         $password = password_hash($message["password"], PASSWORD_BCRYPT) . "'"], // values
+                        "users", // table
+                    ];
+                    $this->db->insert($params);
+                    $connection->send(json_encode(["type" => "createdUser"], JSON_PRETTY_PRINT));
                     break;
                 default:
                     throw new Exception("Invalid message type. (this is a human made error message)");

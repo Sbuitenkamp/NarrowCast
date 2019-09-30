@@ -38,9 +38,10 @@ function changeAnimation(element) {
 }
 
 function createModule(element) {
-    const data = formToJSON(element.children);
+    const data = formToJSON(element.parentElement.children);
     data.type = 'createModule';
     conn.send(JSON.stringify(data));
+    window.location = './admin.php';
 }
 
 function deleteModule(element) {
@@ -51,6 +52,12 @@ function deleteModule(element) {
     }
 }
 
+function createUser(element) {
+    const data = formToJSON(element.parentElement.children);
+    data.type = 'createUser';
+    conn.send(JSON.stringify(data));
+    window.location = './admin.php';
+}
 
 // form to json. again, if you touch this: your dreams, haunted
 const isValidElement = element => element.name && element.value;
