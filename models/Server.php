@@ -46,12 +46,14 @@ class Server implements MessageComponentInterface
                         ["activated" => true, "id" => $message["id"]], // conditions
                         1 // limit
                     ]);
-                    $dataToSend = [
-                        "type" => "html",
-                        "html" => $this->loadModule($data[0]["name"]),
-                        "timeout" => $data[0]["timeout"]
-                    ];
-                    $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    if (isset($data[0])) {
+                        $dataToSend = [
+                            "type" => "html",
+                            "html" => $this->loadModule($data[0]["name"]),
+                            "timeout" => $data[0]["timeout"]
+                        ];
+                        $connection->send(json_encode($dataToSend, JSON_PRETTY_PRINT));
+                    } else $connection->send(json_encode(["type" => "htmlNotFound"], JSON_PRETTY_PRINT));
                     break;
                 case "init":
                     $data = $this->db->select([
@@ -102,7 +104,7 @@ class Server implements MessageComponentInterface
                     }
                     $dataToSend = [
                         "type" => "updatedSettings",
-                        "result" => $this->db->update($params),
+                        "generalSetting" => $this->db->update($params),
                     ];
                     $this->broadCast(json_encode($dataToSend, JSON_PRETTY_PRINT));
                     break;
@@ -113,7 +115,7 @@ class Server implements MessageComponentInterface
                         ["id" => 1] //conditions
                     ];
                     $dataToSend = [
-                        "type" => "updatedModule",
+                        "type" => "updatedAnimation",
                         "result" => $this->db->update($params)
                     ];
                     $this->broadCast(json_encode($dataToSend, JSON_PRETTY_PRINT));
@@ -143,7 +145,7 @@ class Server implements MessageComponentInterface
                 case "createUser":
                     $params = [
                         ["username", "password"], // columns
-                        ["'" . $message["username"] . "'", "'" .         $password = password_hash($message["password"], PASSWORD_BCRYPT) . "'"], // values
+                        ["'" . $message["username"] . "'", "'" . $password = password_hash($message["password"], PASSWORD_BCRYPT) . "'"], // values
                         "users", // table
                     ];
                     $this->db->insert($params);
