@@ -10,10 +10,11 @@
 
 .header__title {
     margin-left: 120px;
+    cursor: pointer;
 }
 
 .header__logout-container {
-    width: 9em;
+    width: 20%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,13 +24,21 @@
 .header__logout-container .username {
     text-align: center;
     font-weight: 500;
+    pointer-events: none;
 }
 
 .header__logout-container .logout-btn, .header__logout-container .add-user-btn {
     border: none;
-    background-color: #EA0027;
     color: #ffffff;
-    padding: .5em 1.5em;
+    padding: .5em 1em;
     border-radius: .2rem;
     cursor: pointer;
+}
+
+.header__logout-container .logout-btn {
+    background-color: #EA0027;
+}
+
+.header__logout-container .add-user-btn {
+    background-color: #5b60b3;
 }

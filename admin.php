@@ -34,14 +34,7 @@ if (isset($_SESSION["username"])) {
         <title>Narrow Cast - Admin panel</title>
     </head>
     <body>
-        <div class="header">
-            <h2 class="header__title">Narrowcast Admin Panel</h2>
-            <div class="header__logout-container">
-                <p class="username"><?=$_SESSION['username'];?></p>
-                <button class="logout-btn" onclick="logOut();">Log Uit</button>
-                <a class="add-user-btn" href="./add-user.php">Voeg gebruiker toe</a>
-            </div>
-        </div>
+        <?php include './includes/navbar.php'; ?>
         <div class="animations-container">
             <form class="animations-container" action="">
             <h2>Kies animatie:</h2>
@@ -54,11 +47,13 @@ if (isset($_SESSION["username"])) {
             <div class="sort-items">
                 <ul class="sort-items__list"></ul>
             </div>
-            <div class="add">
-                <a href="./add-module.php" class="add__button">Module Toevoegen</a>
+            <div class="save-container">
+                <button class="save-button" onclick="orderOnClick()">Opslaan</button>
             </div>
-            <button class="save-button" onclick="orderOnClick()">Opslaan</button>
         </div>
+        <div class="add-container">
+                <a href="./add-module.php" class="add-container__button">Module Toevoegen</a>
+            </div>
         <div class="settings-container"></div>
     </body>
     </html>
