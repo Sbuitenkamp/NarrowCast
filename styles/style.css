@@ -1,6 +1,22 @@
 .hidden {
     display: none;
 }
+.back-button {
+    border: none;
+    padding: .8em 1.2em;
+    background-color: #002159;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: .8rem;
+    cursor: pointer;
+    position: absolute;
+    text-decoration: none;
+    top: calc(60px + 40px);
+    left: 120px;
+}
 
 .error {
     position: absolute;
