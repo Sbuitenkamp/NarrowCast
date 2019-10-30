@@ -1,17 +1,47 @@
 .footer {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-    height: 1.6em;
+    height: 2.5em;
     background-color: #002159;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: #ffffff;
+    margin-top: 6.4rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.footer__date{
+    margin-right: 20px;
+}
+
+.footer__timer {
+    margin-left: 20px;
 }
 
 .footer__copyright {
     font-size: 0.9rem;
     opacity: 1;
+}
+
+.footer__carousel {
+    display: flex;
+    align-items: center;
+
+}
+
+.footer__carousel__dot {
+    height: 12.5px;
+    width: 12.5px;
+    margin-right: 5px;
+    background-color: #1B6B64;
+    border-radius: 50%;
+    transition: background-color 0.6s ease;
+}
+
+.footer__carousel__dot--active {
+    height: 25px;
+    width: 25px;
+    background-color: #00AA9D;
 }
