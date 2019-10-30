@@ -31,6 +31,14 @@ function logOut() {
     window.location = './logout.php';
 }
 
+function toAddUser() {
+    window.location = './add-user.php';
+}
+
+function toHome() {
+    window.location = './admin.php';
+}
+
 function changeAnimation(element) {
     const data = formToJSON(element.parentElement.children);
     data.type = 'updateAnimation';

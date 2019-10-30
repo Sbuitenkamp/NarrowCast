@@ -64,17 +64,6 @@
     cursor: grab;
 }
 
-.sort-container__list__item > button {
-    margin-left: 10px;
-    border: none;
-    background-color:#ea0027;
-    font-size: 1.2rem;
-    color:#ffffff;
-    border-radius: 50%;
-    width: 25px;
-    cursor: pointer;
-}
-
 .sort-items__list {
     display: inherit;
     list-style: none;
@@ -96,11 +85,11 @@
 .sort-items__list__item > button {
     margin-left: 10px;
     border: none;
-    background-color:#ea0027;
-    font-size: 1.2rem;
-    color:#ffffff;
+    background-color: #ea0027;
+    font-size: 1rem;
+    color: #ffffff;
+    padding: .2rem 0.4rem;
     border-radius: 50%;
-    width: 25px;
     cursor: pointer;
 }
 
@@ -109,7 +98,7 @@
     display: grid;
     justify-content: center;
     grid-gap: 20px;
-    grid-template-columns: 510px 510px;
+    grid-template-columns: 550px 550px;
 }
 
 .settings-container__item {
@@ -146,7 +135,15 @@
     margin-top: 2rem;
 }
 
-.module input[type="radio"] {
+.module > input[name="name"] {
+    border: none;
+    border-bottom: 1px solid;
+    font-size: 1rem;
+    padding: .5em 0;
+    outline: none;
+}
+
+.module > input[type="radio"] {
     margin: 0px 10px;
 }
 
@@ -158,17 +155,37 @@
     margin-right: 0;
 }
 
-.module > button {
+.module > .save-button {
     position: absolute;
-    right: 2rem;
-    bottom: -.5rem;
+    right: 1rem;
+    bottom: -2rem;
 }
 
-.add {
-    margin-bottom: 20px;
+.module > .remove-button {
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
 }
 
-.add__button {
+.save-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column-reverse;
+}
+
+
+/* BUTTONS */
+.add-container {
+    width: 100%;
+    height: 7%;
+    display: flex;
+    align-items: center;
+    margin-left: 208px;
+}
+
+.add-container__button {
     border: none;
     padding: .8em 1.2em;
     background-color:#002159;
@@ -179,4 +196,22 @@
     letter-spacing: 1.5px;
     font-size: .8rem;
     text-decoration: none;
+}
+
+.remove-button {
+    margin-left: 10px;
+    border: none;
+    background-color: #ea0027;
+    font-size: 1rem;
+    color: #ffffff;
+    padding: .2rem 0.4rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* MISC */
+
+.interval-text {
+    margin: 30px 0 0 0;
+    font-size: 1rem;
 }
