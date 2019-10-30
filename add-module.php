@@ -53,6 +53,7 @@ session_start();
 <body>
    <?php include './includes/navbar.php'; ?>
     <div class="container">
+    <div class="back-button" onClick="toHome()">Terug</div>
         <form class="module" onsubmit="return false;">
             <span>Module naam:</span> <input type="text" name="name">
             <span>Interval in seconden:</span> <input type="text" name="timeout">

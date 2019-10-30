@@ -58,7 +58,7 @@ conn.onmessage = e => {
 function loadSortItems(setting) {
     if (setting.activated) sortItemContainer.innerHTML += `
         <li class="sort-items__list__item">
-            <span hidden>${setting.id}</span>
+            <span>${setting.id}</span>
             ${setting.name}
         </li>
     `;
@@ -72,7 +72,7 @@ function loadSortedItems(data) {
         if (!moduleSetting) continue;
         if (moduleSetting.activated) sortContainer.innerHTML += `
             <li class='sort-container__list__item'>
-                <span hidden>${id}</span>
+                <span>${id}</span>
                 ${moduleSetting.name}
                 <button class="remove-button" onclick="deleteElement(this);"><i class="fa fa-times"></i></button>
             </li>

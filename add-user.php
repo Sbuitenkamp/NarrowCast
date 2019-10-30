@@ -52,6 +52,7 @@ session_start();
 </head>
 <body>
    <?php include './includes/navbar.php'; ?>
+   <div class="back-button" onClick="toHome()">Terug</div>
     <div class="container">
         <form class="module" onsubmit="return false;">
             <span>Naam:</span> <input type="text" name="username" autocomplete="off">

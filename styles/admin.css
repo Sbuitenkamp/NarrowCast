@@ -51,6 +51,7 @@
     display: inherit;
     list-style: none;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .sort-container__list__item {
@@ -62,6 +63,8 @@
     display: flex;
     align-items: center;
     cursor: grab;
+    position: relative;
+    margin: 10px 5px;
 }
 
 .sort-items__list {
@@ -80,6 +83,21 @@
     display: flex;
     align-items: center;
     cursor: grab;
+    position: relative;
+    margin: 10px 5px;
+}
+
+.sort-container__list__item > span,
+.sort-items__list__item > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #002159;
+    width: 100%;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: transparent;
+    text-align: center;
 }
 
 .sort-items__list__item > button {
@@ -99,6 +117,7 @@
     justify-content: center;
     grid-gap: 20px;
     grid-template-columns: 550px 550px;
+    margin-bottom: 20px;
 }
 
 .settings-container__item {
@@ -141,6 +160,7 @@
     font-size: 1rem;
     padding: .5em 0;
     outline: none;
+    background: transparent;
 }
 
 .module > input[type="radio"] {
